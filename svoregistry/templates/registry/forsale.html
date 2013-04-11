@@ -1,0 +1,52 @@
+{% extends 'registry/base.html' %}
+{% block title %}SVOs For Sale{% endblock %}
+{% block head %}
+	<style type="text/css">
+		#ulCarsForSale {
+			margin-left: 0;
+			padding-left: 0;
+		}
+		#ulCarsForSale li {
+			margin-bottom: 15px;
+			margin-left: 0;
+			padding-left: 0;
+			list-style: none;
+		}
+	</style>
+	<script src="{{ STATIC_URL }}js/common.js"></script>
+	<script src="{{ STATIC_URL }}js/car_listitem.js"></script>
+	<script language="javascript" type="text/javascript">
+		$(document).ready(function() {
+			var json = {{ json|safe }};
+			var divContainer = document.getElementById("divContainer");
+			if(json.length == 0) {
+			
+			}
+			else {
+				
+				for(count in json) {
+					var div = getCarListItem(json[count], true, false, true, false);
+					divContainer.appendChild(div);
+				}
+			}
+		});
+	</script>
+{% endblock %}
+{% block content %}
+
+<h2 class="h2Left">SVOs listed for sale in the last 30 days</h2>
+<div id="divContainer"></div>
+<noscript>
+	{% for entry in entries %}
+		{% include 'registry/entry_listitem.html' %}
+	{% endfor %}
+</noscript>
+<div class="divP" style="display: none">
+	<ul id="ulCarsForSale">
+		{% for entry in entries %}
+			<li><a href="/{{ entry.car }}/">{{ entry.car }}</a> - {{entry.year }} {{ entry.color }}</li>
+		{% endfor %}
+		
+	</ul>
+</div>
+{% endblock %}

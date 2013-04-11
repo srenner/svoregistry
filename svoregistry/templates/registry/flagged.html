@@ -1,0 +1,41 @@
+{% extends 'registry/base.html' %}
+{% block title %}Flagged Entries{% endblock %}
+{% block head %}
+	<style type="text/css">
+		.flagInfo {
+			margin-left: 20px;
+			font-size: 10pt;
+		}
+	</style>
+	<script src="{{ STATIC_URL }}js/common.js"></script>
+	<script src="{{ STATIC_URL }}js/car_listitem.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var json = {{ json|safe }};
+			var divContainer = document.getElementById("divContainer");
+			if(json.length == 0) {
+			}
+			else {
+				for(count in json) {
+					var div = getCarListItem(json[count], false, false, true, false);
+					var divFlag = document.createElement("div");
+					divFlag.className = "carListItemIndent";
+					divFlag.innerHTML = "Entry ID " + json[count].pk + " flagged " + json[count].fields.entry_flag + " time(s).";
+					div.appendChild(divFlag);
+					//debugger;
+					divContainer.appendChild(div);
+				}
+			}
+		});
+	</script>
+{% endblock %}
+{% block content %}
+<h2 class="h2Left">Flagged Entries</h2>
+<p>These registry entries have been flagged for review and should be looked at by a moderator.</p>
+<div id="divContainer"></div>
+<noscript>
+	{% for entry in entries %}
+		{% include 'registry/entry_listitem.html' %}
+	{% endfor %}
+</noscript>
+{% endblock %}

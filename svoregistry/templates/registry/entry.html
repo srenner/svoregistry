@@ -1,0 +1,33 @@
+<div style="border: solid 2px #d7d7d7; padding: 5px; margin: 5px">
+	<div>
+		{{entry.year}} SVO with
+		{% if entry.mileage %} 
+			{{entry.mileage}}
+		{% else %}
+			unknown
+		{% endif %}
+		miles. 
+		Entry added {{entry.entry_datetime}}
+	</div>
+	<div>
+		Owner: {{entry.owner}}.
+		Location: {{entry.city}} {{entry.state}} {{entry.country}} {{entry.zipcode}}
+	</div>
+	<div>Still has 2.3L: {{entry.has_23|yesno:"Yes,No"}}</div>
+	<div>On road: {{entry.on_road|yesno:"Yes,No"}}</div>
+	<div>
+		{% if not entry.on_road %}
+			{% if entry.deceased %}
+				<span style="color: #FF0000">This car is labeled as deceased</span>
+			{% endif %}
+		{% endif %}
+	</div>
+	<h3>Car Options</h3>
+	<div>Color code: {{entry.color}}</div>
+	<div>Interior: {{entry.interior}}</div>
+	<div>Competition prep: {{entry.comp_prep|yesno:"Yes,No"}}</div>
+	<div>Sunroof: {{entry.sunroof|yesno:"Yes,No"}}</div>
+	<div>Bi-wing delete: {{entry.wing_delete|yesno:"Yes,No"}}</div>
+	<h3>Comments</h3>
+	<div id="divEntryComments">{{entry.comments|safe}}</div>
+</div>

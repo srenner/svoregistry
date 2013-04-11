@@ -1,0 +1,47 @@
+{% extends 'registry/base.html' %}
+{% block title %}Download the Registry{% endblock %}
+{% block head %}
+	<style type="text/css">
+	</style>
+{% endblock %}
+{% block content %}
+
+<h2 class="h2Left">Download the registry</h2>
+
+<div style="display: none">
+	<p>
+		The CSV file is easy for people to read and can be opened with Microsoft Office, <a href="http://www.libreoffice.org/">LibreOffice</a>, 
+		or other office software.
+		This is the best option if you simply want a copy of the registry on your home computer.
+	</p>
+	<div class="divP">
+		<form name="formCSV" method="get" action="/download/csv/">
+			<input type="submit" id="btnDownloadCSV" value="Download CSV" />
+		</form>
+	</div>
+</div>
+<div>
+	<p>CSV downloading is temporarily unavailable. Sorry for the inconvenience.</p>
+</div>
+<div>
+	<p>
+		The XML file is not as easy for people to read, but some programmers prefer data in this format.
+	</p>
+	<div class="divP">
+		<form name="formXML" method="get" action="/download/xml/">
+			<input type="submit" id="btnDownloadXML" value="Download XML" />
+		</form>
+	</div>
+</div>
+<div>
+	<p>
+		The JSON file is difficult for people to read, but it is a popular format among computer programmers.
+		This is a good option if you want to import the data into your own system and have worked with JSON before.
+	</p>
+	<div class="divP">
+		<form name="formJSON" method="get" action="/download/json/">
+			<input type="submit" id="btnDownloadJSON" value="Download JSON" />
+		</form>
+	</div>
+</div>
+{% endblock %}

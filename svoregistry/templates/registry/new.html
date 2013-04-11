@@ -1,0 +1,29 @@
+{% extends 'registry/base.html' %}
+{% block title %}Newest Entries{% endblock %}
+{% block head %}
+	<script src="{{ STATIC_URL }}js/common.js"></script>
+	<script src="{{ STATIC_URL }}js/car_listitem.js"></script>
+	<script language="javascript" type="text/javascript">
+		$(document).ready(function() {
+			var json = {{ json|safe }};
+			var divContainer = document.getElementById("divContainer");
+			if(json.length == 0) {
+			}
+			else {
+				for(count in json) {
+					var div = getCarListItem(json[count], false, false, true, false);
+					divContainer.appendChild(div);
+				}
+			}
+		});
+	</script>
+{% endblock %}
+{% block content %}
+<h2 class="h2Left">Newest Registry Entries</h2>
+<div id="divContainer"></div>
+<noscript>
+	{% for entry in entries %}
+		{% include 'registry/entry_listitem.html' %}
+	{% endfor %}
+</noscript>
+{% endblock %}

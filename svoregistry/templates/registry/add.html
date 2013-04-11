@@ -1,0 +1,82 @@
+<script src="{{ STATIC_URL }}js/add.js"></script>
+<script language="javascript" type="text/javascript">
+	$(document).ready(function() {
+		//alert(Globals.workingVIN);
+		$( "#{{ form.entry_datetime.auto_id }}" ).datepicker({			
+																changeMonth: true,
+																changeYear: true,
+																minDate: new Date(1983, 7, 1),
+																maxDate: new Date()});
+		$("#{{ form.entry_datetime.auto_id }}").datepicker("setDate", new Date());
+		document.getElementById("{{ form.entry_datetime.auto_id }}").readOnly = true;
+		document.getElementById("btnSave").onclick = function() { 
+			document.getElementById("formAdd").action = "/" + Globals.workingVIN + "/";
+		};
+		
+		document.getElementById("{{ form.car.auto_id }}").value = Globals.workingVIN;
+		//document.getElementById("{{ form.car.auto_id }}").disabled = "disabled";
+	});
+	function validateEntry() {
+		var mileage = document.getElementById("{{ form.mileage.auto_id }}").value; 
+		mileage = Math.floor(mileage.replace(/,/g,''));
+		document.getElementById("{{ form.mileage.auto_id }}").value = mileage;
+		return true;
+	}
+</script>
+<div id="divAdd" style="display: none">
+	<form id="formAdd" name="formAdd" enctype="multipart/form-data" method="post" onsubmit="return validateEntry()">
+		{% csrf_token %}
+		<h2 class="center" id="h2AddEntry"></h2>
+		<fieldset>
+			<legend>Car Info</legend>
+			<div>
+				<span style="display: none">{{ form.car }}</span>
+				<span class="form-field">{{ form.year.label_tag }} {{ form.year }}</span>
+				<span id="spanSlappers" class="form-field">{{ form.slappers.label_tag }} {{ form.slappers }}</span>
+				<span class="form-field">{{ form.mileage.label_tag }} {{ form.mileage }}</span>
+				<span class="form-field">{{ form.color.label_tag }} {{ form.color }}</span>
+			</div>
+			<div>
+				<span class="form-field">{{ form.interior.label_tag }} {{ form.interior }}</span>
+				<span class="form-field">{{ form.sunroof.label_tag }} {{ form.sunroof }}</span>
+				<span class="form-field">{{ form.comp_prep.label_tag }} {{ form.comp_prep }}</span>
+				<span id="spanOptionDelete" class="form-field">{{ form.option_delete.label_tag }} {{ form.option_delete }}</span>
+			</div>
+			<div>
+				<span class="form-field">{{ form.wing_delete.label_tag }} {{ form.wing_delete }}</span>
+				<span class="form-field">{{ form.has_23.label_tag }} {{ form.has_23 }}</span>
+				<span class="form-field">{{ form.on_road.label_tag }} {{ form.on_road }}</span>
+				<span id="spanDeceased" class="form-field">{{ form.deceased.label_tag }} {{ form.deceased }}</span>
+				<span class="form-field">{{ form.photo.label_tag }} {{ form.photo }}</span>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Owner Info</legend>
+			<div id="divForSale">
+				<span>{{ form.for_sale }}</span>
+				<label for={{ form.for_sale.auto_id }}>
+					Promote this car in the "SVOs for Sale" section
+				</label>
+			</div>
+			<div>
+				<span class="form-field">{{ form.owner.label_tag }} {{ form.owner }}</span>
+				<span class="form-field">{{ form.city.label_tag }} {{ form.city }}</span>
+				<span class="form-field">{{ form.state.label_tag }} {{ form.state }}</span>
+				<span class="form-field">{{ form.country.label_tag }} {{ form.country }}</span>
+				<span class="form-field">{{ form.zipcode.label_tag }} {{ form.zipcode }}</span>
+				<span class="form-field">{{ form.entry_datetime.label_tag }} {{ form.entry_datetime }}</span>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Comments</legend>
+			<span>{{ form.comments }}</span>
+		</fieldset>
+		<div class="center">
+			
+		</div>
+		<div class="center">
+			<input type="submit" id="btnSave" value="Save" />
+			<input type="button" value="Cancel" onclick="cancelAdd()" />
+		</div>
+	</form>
+</div>

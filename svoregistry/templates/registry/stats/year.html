@@ -1,0 +1,31 @@
+{% extends 'registry/base.html' %}
+{% block title %}Registry Year Report{% endblock %}
+{% block head %}
+	<script src="{{ STATIC_URL }}js/common.js"></script>
+	
+{% endblock %}
+{% block content %}
+	{% load humanize %}
+	<h1>Registry entries by vehicle year</h1>
+	<div>
+		<table class="grid">
+			<thead>
+				<tr>
+					<th>Year</th>
+					<th>Registry Entries</th>
+					<th>Total Production</th>
+				</tr>
+			</thead>
+			<tbody>
+				{%for row in report%}
+				<tr class="{% cycle '' 'altrow' %}">
+					<td>{{row.year}}</td>
+					<td>{{row.count|intcomma}}</td>
+					<td>{{row.total_production|intcomma}}</td>
+				</tr>
+				{%endfor%}				
+			</tbody>
+		</table>
+		
+	</div>
+{% endblock %}

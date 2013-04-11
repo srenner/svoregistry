@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{% block title %}{% endblock %}</title>
+	<style type="text/css">
+		body {
+			background-image:url('{{ STATIC_URL }}img/carbon_fibre_big.png');
+			background-attachment:fixed;
+		}
+	</style>
+	<script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+	<script src="{{ STATIC_URL }}js/jquery-ui-1.8.20.custom.min.js"></script>
+	<script src="{{ STATIC_URL }}js/csrf.js"></script>
+	<script src="{{ STATIC_URL }}js/tiny_mce/tiny_mce.js"></script>
+	<script type="text/javascript">
+		var Globals = {
+		  staticURL: "{{ STATIC_URL }}",
+		  mediaURL: "{{ MEDIA_URL }}",
+		  workingVIN: ""
+		};
+		$(document).ready(function() {
+			//
+		});
+		
+		tinyMCE.init({
+		        theme : "simple",
+		        mode : "textareas",
+		        width: "100%",
+		        content_css: Globals.staticURL + "css/tinymce_custom.css",
+				plugins : "paste",
+				paste_text_sticky : true,
+				setup : function(ed) {
+				    ed.onInit.add(function(ed) {
+				      ed.pasteAsPlainText = true;
+				    });
+			  	}
+		});
+		
+		function flagEntry(entryID, a) {
+			$.post("/flag/" + entryID + "/", function(data) {
+				
+			}).error(function(e, jqxhr, settings, exception) {
+		
+			});
+		}
+		
+		function yesNo(b) {
+			if(b) {
+				if(b == true) return "Yes";
+				if(b.length == 0 || b.toLowerCase() == "unknown") return "Unknown";
+				return "Yes";	
+			}
+			else {
+				if(b == null) return "Unknown"; 
+				return "No";
+			}
+		}
+	</script>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/blitzer/jquery-ui-1.8.20.custom.css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/common.css?v=2" />
+	{% block head %}{% endblock %}
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-33233994-1']);
+	  _gaq.push(['_trackPageview']);
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+</head>
+<body>
+	<div id="divHeader">
+		<a href="/" style="display: inline-table"><img src="{{ STATIC_URL }}img/shadow_logo.png" alt="SVO" width="167" height="40" border="0" /></a>
+		<h1 style="font-variant: small-caps; display: inline-table; font-style: italic">Registry</h1>
+		<span id="spanSubtitle">Dedicated to tracking and preserving the 1984 - 1986 Ford Mustang SVO</span>
+		<span class="plusOneHeader">
+			<a href="https://twitter.com/SVOregistry" class="twitter-follow-button" data-show-count="false">Follow @SVOregistry</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			<div class="g-plusone" data-size="medium" data-annotation="none"></div>
+			<script type="text/javascript">
+			  (function() {
+			    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			    po.src = 'https://apis.google.com/js/plusone.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			  })();
+			</script>
+		</span>
+	</div>
+	<div id="divNavigation">
+		<ul id="ulNavigation">
+			<li><a href="/">Home</a></li>
+			<li><a href="/new/">New</a></li>
+			<li><a href="/forsale/">For Sale</a></li>
+			<li><a href="/stats/">Stats</a></li>
+			<li><a href="/download/">Download</a></li>
+			<li><a href="/about/">About</a></li>
+		</ul>
+	</div>
+	<div id="divContent">
+		<noscript>
+			<div class="warning">
+				For the best experience, enable JavaScript in your browser.
+			</div>
+		</noscript>
+		{% block content %}{% endblock %}
+	</div>
+	<div id="divFoot">
+		website design and software development by <a href="http://shawnrenner.com/">srenner</a>
+	</div>
+</body>
+</html>

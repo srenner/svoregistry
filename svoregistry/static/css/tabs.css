@@ -1,0 +1,38 @@
+.tabs {
+	width: 900px;
+ 	margin-left: auto; 
+ 	margin-right: auto;
+ 	padding: 0;
+ 	margin-bottom: 20px;
+ 	border-bottom: solid 6px #D7D7D7;	
+}
+
+.tabs ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;	
+}
+
+.tabs ul li {
+	display: inline;
+	cursor: pointer;
+	margin-right: 35px;
+	font-size: 20pt;
+	font-weight: bold;
+	margin-bottom: 0px;	
+}
+
+.selectedTab {
+	border-bottom: solid 7px #620000;
+}
+
+		#divTabs {
+
+		}
+		#ulTabs {
+
+		}
+		#ulTabs li {
+
+		}
+

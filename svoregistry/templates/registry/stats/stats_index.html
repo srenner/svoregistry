@@ -1,0 +1,193 @@
+{% extends 'registry/base.html' %}
+{% block title %}Registry Stats{% endblock %}
+{% block head %}
+	<style type="text/css">
+		.graph {
+			height: 400px;
+			margin: 10px 10px 40px 10px;
+		}
+	</style>
+	<script src="{{ STATIC_URL }}js/common.js"></script>
+	<script src="{{ STATIC_URL }}js/flotr2.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			yearReport();
+			statusReport();
+			colorReport();
+		});
+		
+		var yearReport = function() {
+			$.get("/stats/year/", function(data) {
+				var year = [];	//data for x-axis 
+				var count = [];	//cars in registry per year
+				var total = [];	//total production per year
+				for(var i = 0; i < data.length; i++) {
+					count.push([i, data[i].count]);
+					year.push([i+.15, data[i].year]);
+					total.push([i+0.3, data[i].total_production]);
+				}
+				var bar1 = {
+					data: count,
+					label: "Cars in registry",
+					bars: {
+						show: true,
+						barWidth: 0.3,
+						color: "#666666",
+						fillColor: "#333333",
+						fillOpacity: .8
+					}					
+				};
+				mark1 = {
+	        		data: count,
+			        markers: {
+		            	show: true,
+		              	position: 'ct',
+		              	fontSize: '10',
+					}
+				};
+				var bar2 = {
+					data: total,
+					label: "Total production",
+					bars: {
+						show: true,
+						barWidth: 0.3,
+						color: "#666666",
+						fillColor: "#620000",
+						fillOpacity: .8
+					}
+				};
+				mark2 = {
+	        		data: total,
+			        markers: {
+		            	show: true,
+		              	position: 'ct',
+		              	fontSize: '10'
+					}
+				}; 
+				var options = {
+		          	legend : {
+						position : 'ne',
+						backgroundOpacity: .8,
+						backgroundColor: '#d7d7d7'
+					},
+					xaxis: {
+        				ticks: year
+    				},
+    				title: "Registered cars by year"
+				};
+			    Flotr.draw(document.getElementById("yearReport"), [bar1, mark1, bar2, mark2], options);
+			});
+		};
+		var statusReport = function() {
+			$.get("/stats/status/", function(data) {
+				var dataPoints = [];
+				var labels = [];
+				for(var i = 0; i < data.length; i++) {
+					dataPoints.push([i, data[i].count]);
+					labels.push(data[i].status);
+				}
+				var slice1 = {
+					data: [dataPoints[0]],
+					label: labels[0]
+				}; // probably "Alive" but order is not guaranteed
+				var slice2 = {
+					data: [dataPoints[1]],
+					label: labels[1]
+				}; // probably "Deceased"
+				var slice3 = {
+					data: [dataPoints[2]],
+					label: labels[2]
+				};
+				var options = {
+		          	legend : {
+						position : 'ne',
+						backgroundOpacity: .8,
+						backgroundColor: '#d7d7d7'
+					},
+			        grid: {
+			            verticalLines: false,
+			            horizontalLines: false
+			        },
+			        xaxis: {
+			            showLabels: false
+			        },
+			        yaxis: {
+			            showLabels: false
+			        },
+					pie: {
+						show: true,
+						explode: 0,
+						labelFormatter: function(total, value) {
+							return value;
+						}
+					},
+    				title: "Vehicle status"
+				};
+			    Flotr.draw(document.getElementById("statusReport"), [slice1, slice2, slice3], options);
+			});
+		};
+		var colorReport = function() {
+			$.get("/stats/colors/", function(data) {
+				var codes = [];
+				var count = [];
+				for(var i = 0; i < data.length; i++) {
+					
+					codes.push([i, data[i].color]);
+					
+					count.push([i, data[i].count]);
+				}
+				var bar1 = {
+					data: count,
+					bars: {
+						show: true,
+						barWidth: 0.5,
+						color: "#666666",
+						fillColor: "#620000",
+						fillOpacity: .8
+					}					
+				};
+				mark1 = {
+	        		data: count,
+			        markers: {
+		            	show: true,
+		              	position: 'ct',
+		              	fontSize: '10',
+					}
+				};
+				var options = {
+					xaxis: {
+        				ticks: codes
+    				},
+		        	yaxis: {
+            			min: 0,
+            			autoscaleMargin: 1
+        			},
+    				title: "Registered cars by color code"
+				};
+				//debugger;
+			    Flotr.draw(document.getElementById("colorReport"), [bar1,mark1], options);
+			});
+		};
+	</script>
+{% endblock %}
+{% block content %}
+	{% load humanize %}
+	<h2 class="h2Left">Registry stats</h2>
+	
+	<!--[if lte IE 8]>
+		<div class="warning">
+			Upgrade your web browser to enable graphs.			
+		</div>
+		<ul>
+			<li><a href="/stats/year/">Year stats</a></li>
+			<li><a href="/stats/status/">Vehicle status</a></li>
+			<li><a href="/stats/colors/">Vehicle colors</a></li>
+		</ul>
+	<![endif]-->
+	
+	<p>The registry now contains {{cars}} cars and {{entries}} entries!</p>
+	
+	<div id="yearReport" class="graph"></div>
+	<div id="statusReport" class="graph"></div>
+	<div id="colorReport" class="graph"></div>
+{% endblock %}

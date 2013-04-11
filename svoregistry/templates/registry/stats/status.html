@@ -1,0 +1,28 @@
+{% extends 'registry/base.html' %}
+{% block title %}Registry Car Status Report{% endblock %}
+{% block head %}
+	<script src="{{ STATIC_URL }}js/common.js"></script>
+	
+{% endblock %}
+{% block content %}
+	{% load humanize %}
+	<h1>Registry entries by vehicle status</h1>
+	<div>
+		<table class="grid">
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Count</th>
+				</tr>
+			</thead>
+			<tbody>
+				{%for row in report%}
+				<tr class="{% cycle '' 'altrow' %}">
+					<td>{{row.status}}</td>
+					<td>{{row.count|intcomma}}</td>
+				</tr>
+				{%endfor%}				
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

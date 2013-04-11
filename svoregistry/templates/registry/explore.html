@@ -1,0 +1,30 @@
+{% extends 'registry/base.html' %}
+{% block title %}Explore Registry Entries{% endblock %}
+{% block head %}
+	<script src="{{ STATIC_URL }}js/common.js"></script>
+	<script src="{{ STATIC_URL }}js/car_listitem.js"></script>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/tabs.css" />
+	<style type="text/css">
+		.centerSpinner {
+		   margin-left: 50px;
+		}
+	</style>
+	<script src="{{ STATIC_URL }}js/pages/registry/explore.js"></script>
+{% endblock %}
+{% block content %}
+
+<div id="divTabs" class="tabs">
+	<ul id="ulTabs">
+		<li class="selectedTab" onclick="switchTab(0); loadForSale();">For Sale</li>
+		<li onclick="switchTab(1); loadNew();">New Entries</li>
+		<li onclick="switchTab(2); loadSave();">Save an SVO</li>
+		<li onclick="switchTab(3); loadLow();">Low Miles</li>
+	</ul>
+</div>
+<div id="divEntryContainer">
+	<div id="divForSale" name="container"><img class="centerSpinner" src="{{ STATIC_URL }}img/ajax-loader-big.gif" /></div>
+	<div id="divNew" name="container" style="display: none"><img class="centerSpinner" src="{{ STATIC_URL }}img/ajax-loader-big.gif" /></div>
+	<div id="divSave" name="container" style="display: none"><img class="centerSpinner" src="{{ STATIC_URL }}img/ajax-loader-big.gif" /></div>
+	<div id="divLow" name="container" style="display: none"><img class="centerSpinner" src="{{ STATIC_URL }}img/ajax-loader-big.gif" /></div>
+</div>
+{% endblock %}
