@@ -1,4 +1,4 @@
-svoregistry-web
+svoregistry
 ===============
 
 SVOregistry.com Django web application.
