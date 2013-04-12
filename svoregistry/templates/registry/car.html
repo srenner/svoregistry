@@ -2,17 +2,6 @@
 {% block title %}Mustang SVO {{car.vin}}{% endblock %}
 {% block head %}
 	<style type="text/css">
-		#divBackground {
-		   	position: absolute;
-			left:0;
-			right:0;
-			top:40px;
-			text-align: center;
-		   	z-index: -1;
-		   	overflow: hidden;
-		   	color: #FCFCFC;
-		   	font-size: 360pt;
-		}
 		#divMap {
 			width: 500px; 
 			height: 250px; 
@@ -125,7 +114,6 @@
 	</script>
 {% endblock %}
 {% block content %}
-<div id="divBackground" style="display: none">{{ car.year }}</div>
 <h2>Mustang SVO {{car.vin}} - {{ car.year|default_if_none:"19??" }} {{ car.color|default_if_none:"" }}</h2>
 <div id="divMap" style="display: none"></div>
 <div id="divAddButton" class="center">
