@@ -19,10 +19,6 @@
 		  mediaURL: "{{ MEDIA_URL }}",
 		  workingVIN: ""
 		};
-		$(document).ready(function() {
-			//
-		});
-		
 		tinyMCE.init({
 		        theme : "simple",
 		        mode : "textareas",
@@ -36,15 +32,11 @@
 				    });
 			  	}
 		});
-		
 		function flagEntry(entryID, a) {
 			$.post("/flag/" + entryID + "/", function(data) {
-				
 			}).error(function(e, jqxhr, settings, exception) {
-		
 			});
 		}
-		
 		function yesNo(b) {
 			if(b) {
 				if(b == true) return "Yes";
@@ -109,6 +101,8 @@
 	</div>
 	<div id="divFoot">
 		website design and software development by <a href="http://shawnrenner.com/">srenner</a>
+		<br>
+		source code available on <a href="https://github.com/srenner/svoregistry">github</a>
 	</div>
 </body>
 </html>
