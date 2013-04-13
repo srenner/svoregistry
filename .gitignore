@@ -166,3 +166,10 @@ pip-log.txt
 *settings*.py
 *.svn
 todo.ods
+*.pyc
+*.svn
+media/photos/*
+*.log
+.DS_Store
+*.pot
+*.bak
