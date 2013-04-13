@@ -59,7 +59,7 @@ def view_car(request, vin):
             if request.FILES.get("photo"):
                 new_entry.photo = request.FILES['photo']
                 new_entry.save()
-            return HttpResponseRedirect('/' + vin + '/') #redirect to self as a GET to prevent an F5 duplicate entry
+            return HttpResponseRedirect('/' + vin + '/') #redirect to self as a GET to prevent an F5 duplicate entry 
     else:
         pass
     car = get_object_or_404(Car, pk=vin)
