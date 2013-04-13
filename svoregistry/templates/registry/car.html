@@ -1,6 +1,11 @@
 {% extends 'registry/base.html' %}
 {% block title %}Mustang SVO {{car.vin}}{% endblock %}
 {% block head %}
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@svoregistry">
+	<meta name="twitter:title" content="{{ car.year }} Mustang SVO {{ car.color }}">
+	<meta name="twitter:description" content="View entries for SVO with VIN {{car.vin}}">
+	<meta name="twitter:domain" content="SVOregistry.com">
 	<style type="text/css">
 		#divMap {
 			width: 500px; 
