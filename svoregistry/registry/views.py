@@ -13,6 +13,7 @@ from django.core.serializers import xml_serializer
 from django.utils.encoding import smart_unicode
 from django.db import connection
 from django.contrib.auth.decorators import login_required
+from django.http.response import HttpResponseRedirect
 
 def coming_soon(request):
     return HttpResponse('Welcome to the future home of the Mustang SVO registry')
@@ -58,6 +59,7 @@ def view_car(request, vin):
             if request.FILES.get("photo"):
                 new_entry.photo = request.FILES['photo']
                 new_entry.save()
+            return HttpResponseRedirect('/' + vin + '/') #redirect to self as a GET to prevent an F5 duplicate entry
     else:
         pass
     car = get_object_or_404(Car, pk=vin)
