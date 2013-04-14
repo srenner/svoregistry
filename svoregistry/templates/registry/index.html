@@ -24,6 +24,19 @@
 			margin-top: 15px;
 			background-color: #D7D7D7;
 		}
+		#download {
+			margin-top: 30px;
+			margin-bottom: 30px;
+			text-align: center;
+		}
+		#divEntry div {
+			border: none !important;
+			margin-bottom: 0 !important;
+		}
+		#divRandom {
+			padding-bottom: 0;
+			
+		}
 	</style>
 	<script src="{{ STATIC_URL }}js/entry.js"></script>
 	<script src="{{ STATIC_URL }}js/common.js"></script>
@@ -152,7 +165,13 @@
 <div id="divMap">
 	<div style="padding-top: 200px; text-align: center">Loading interactive map...</div>
 </div>
-<div id="divRandom">
+<div id="download">
+	<h2>Download the Registry</h2>
+	<form name="formCSV" method="get" action="/download/csv/">
+		<input type="submit" id="btnDownloadCSV" value="Download" />
+	</form>
+</div>
+<div id="divRandom" class="entry">
 	<h2 class="center">Random Registry Entry</h2>
 	<div id="divRandomVIN"><h3><a href="/{{entry.car.vin}}/">{{entry.car.vin}}</a></h3></div>
 	<noscript>
