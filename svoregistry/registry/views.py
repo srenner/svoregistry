@@ -157,7 +157,7 @@ def about(request):
 def download(request, download_format):
     if download_format == "csv":
         excludes = ['scrape_id', 'entry_flag', 'ip']
-        response = HttpResponse(mimetype='text/csv')
+        response = HttpResponse(content_type='text/csv; charset=utf-8')
         response['Content-Disposition'] = 'attachment; filename=svo_export.csv'
         writer = csv.writer(response)
         headers = []
@@ -169,7 +169,7 @@ def download(request, download_format):
                     do_write = False
                     break
             if do_write:
-                headers.append(field.name)
+                headers.append(smart_unicode(field.name))
         writer.writerow(headers)
         print Entry.objects.all()
         for obj in Entry.objects.all().order_by("id"):
@@ -181,7 +181,8 @@ def download(request, download_format):
                         do_write = False
                         break
                 if do_write:
-                    row.append(smart_unicode(getattr(obj, field.name)))
+                    row_content = smart_unicode(getattr(obj, field.name))
+                    row.append(smart_unicode(row_content))
             writer.writerow(row)
         return response
     if download_format == "json":
