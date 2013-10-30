@@ -20,7 +20,8 @@
 			var json = {{ json|safe }};
 			var divContainer = document.getElementById("divContainer");
 			if(json.length == 0) {
-			
+				divContainer.innerHTML =
+					"<p>No recent entries. Have you checked out <a href=\"http://www.ebay.com\">eBay</a> lately?</p>";
 			}
 			else {
 				
@@ -39,6 +40,8 @@
 <noscript>
 	{% for entry in entries %}
 		{% include 'registry/entry_listitem.html' %}
+		{% empty %}
+	    <p>No recent entries. Have you checked out <a href="http://www.ebay.com">eBay</a> lately?</p>
 	{% endfor %}
 </noscript>
 <div class="divP" style="display: none">
