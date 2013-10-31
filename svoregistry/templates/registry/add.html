@@ -1,7 +1,6 @@
 <script src="{{ STATIC_URL }}js/add.js"></script>
 <script language="javascript" type="text/javascript">
 	$(document).ready(function() {
-		//alert(Globals.workingVIN);
 		$( "#{{ form.entry_datetime.auto_id }}" ).datepicker({			
 																changeMonth: true,
 																changeYear: true,
@@ -14,7 +13,6 @@
 		};
 		
 		document.getElementById("{{ form.car.auto_id }}").value = Globals.workingVIN;
-		//document.getElementById("{{ form.car.auto_id }}").disabled = "disabled";
 	});
 	function validateEntry() {
 		var mileage = document.getElementById("{{ form.mileage.auto_id }}").value; 
@@ -72,7 +70,6 @@
 			<span>{{ form.comments }}</span>
 		</fieldset>
 		<div class="center">
-			
 		</div>
 		<div class="center">
 			<input type="submit" id="btnSave" value="Save" />

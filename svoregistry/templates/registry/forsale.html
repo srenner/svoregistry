@@ -24,7 +24,6 @@
 					"<p>No recent entries. Have you checked out <a href=\"http://www.ebay.com\">eBay</a> lately?</p>";
 			}
 			else {
-				
 				for(count in json) {
 					var div = getCarListItem(json[count], true, false, true, false);
 					divContainer.appendChild(div);
@@ -34,7 +33,6 @@
 	</script>
 {% endblock %}
 {% block content %}
-
 <h2 class="h2Left">SVOs listed for sale in the last 30 days</h2>
 <div id="divContainer"></div>
 <noscript>
@@ -49,7 +47,6 @@
 		{% for entry in entries %}
 			<li><a href="/{{ entry.car }}/">{{ entry.car }}</a> - {{entry.year }} {{ entry.color }}</li>
 		{% endfor %}
-		
 	</ul>
 </div>
 {% endblock %}

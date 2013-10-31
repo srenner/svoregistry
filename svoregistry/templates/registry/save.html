@@ -20,10 +20,8 @@
 			var json = {{ json|safe }};
 			var divContainer = document.getElementById("divContainer");
 			if(json.length == 0) {
-			
 			}
 			else {
-				
 				for(count in json) {
 					var div = getCarListItem(json[count], true, false, false, false);
 					divContainer.appendChild(div);
@@ -31,10 +29,8 @@
 			}
 		});
 	</script>
-	
 {% endblock %}
 {% block content %}
-
 <h2 class="h2Left">SVOs that need some love</h2>
 <div id="divContainer"></div>
 <noscript>
