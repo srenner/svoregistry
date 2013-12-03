@@ -60,13 +60,14 @@ urlpatterns = patterns('',
     
     url(r'^map/', 'registry.views.index_map'),
     
-    url(r'^stats/colors/', 'registry.views.stats_colors'),
+    url(r'^statistics/colors/', 'registry.views.stats_colors'),
     
-    url(r'^stats/year/', 'registry.views.stats_year'),
+    url(r'^statistics/year/', 'registry.views.stats_year'),
     
-    url(r'^stats/status/', 'registry.views.stats_status'),
+    url(r'^statistics/status/', 'registry.views.stats_status'),
     
-    url(r'^stats/', 'registry.views.stats'),
+    url(r'^statistics/', 'registry.views.stats'),
+    
 )
 
 if settings.DEBUG:

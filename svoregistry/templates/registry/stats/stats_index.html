@@ -17,7 +17,7 @@
 		});
 		
 		var yearReport = function() {
-			$.get("/stats/year/", function(data) {
+			$.get("/statistics/year/", function(data) {
 				var year = [];	//data for x-axis 
 				var count = [];	//cars in registry per year
 				var total = [];	//total production per year
@@ -79,7 +79,7 @@
 			});
 		};
 		var statusReport = function() {
-			$.get("/stats/status/", function(data) {
+			$.get("/statistics/status/", function(data) {
 				var dataPoints = [];
 				var labels = [];
 				for(var i = 0; i < data.length; i++) {
@@ -127,7 +127,7 @@
 			});
 		};
 		var colorReport = function() {
-			$.get("/stats/colors/", function(data) {
+			$.get("/statistics/colors/", function(data) {
 				var codes = [];
 				var count = [];
 				for(var i = 0; i < data.length; i++) {
@@ -179,9 +179,9 @@
 			Upgrade your web browser to enable graphs.			
 		</div>
 		<ul>
-			<li><a href="/stats/year/">Year stats</a></li>
-			<li><a href="/stats/status/">Vehicle status</a></li>
-			<li><a href="/stats/colors/">Vehicle colors</a></li>
+			<li><a href="/statistics/year/">Year stats</a></li>
+			<li><a href="/statistics/status/">Vehicle status</a></li>
+			<li><a href="/statistics/colors/">Vehicle colors</a></li>
 		</ul>
 	<![endif]-->
 	
