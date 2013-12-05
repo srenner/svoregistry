@@ -3,7 +3,6 @@ from django.conf import settings
 from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 from registry.models import Car
 
-# Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
